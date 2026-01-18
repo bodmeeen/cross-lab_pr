@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="request-service" />
         <module name="feedback-service" />
+        <module name="frontend-service" />
         <module name="catalog-service" />
       </profile>
     </annotationProcessing>
@@ -16,6 +17,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="catalog-service" options="-parameters" />
       <module name="feedback-service" options="-parameters" />
+      <module name="frontend-service" options="-parameters" />
       <module name="request-service" options="-parameters" />
     </option>
   </component>

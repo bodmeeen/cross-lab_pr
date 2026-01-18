@@ -2,10 +2,10 @@ package org.example.model;
 
 public class Feedback {
     public Long id;
-    public Long requestId;    // Зв'язок з request-service
-    public Integer rating;    // 1-5
+    public Long requestId;
+    public Integer rating;
     public String comment;
-    public String customerName; // Ім'я клієнта (щоб не шукати)
+    public String customerName;
 
     public Feedback() {}
 

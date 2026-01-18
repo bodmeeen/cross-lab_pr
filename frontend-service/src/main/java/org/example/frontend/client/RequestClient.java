@@ -1,18 +1,18 @@
-package org.example.client;
+package org.example.frontend.client;
 
 import io.quarkus.oidc.token.propagation.common.AccessToken;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
+import org.example.frontend.model.RepairRequest;
+
+import java.util.List;
 
 @RegisterRestClient(configKey = "request-api")
 @Path("/requests")
-@AccessToken
+@AccessToken // автоматично передає токен користувача на бекенд
 public interface RequestClient {
 
     @GET
-    @Path("/{id}")
-    Response getById(@PathParam("id") Long id);
+    List<RepairRequest> getAll();
 }

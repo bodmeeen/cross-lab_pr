@@ -9,7 +9,6 @@ public class ServiceItem {
     public BigDecimal price;
     public Integer durationMinutes;
 
-    // Деталі (1:1) додаємо прямо в клас для зручності
     public String description;
     public Integer warrantyMonths;
 

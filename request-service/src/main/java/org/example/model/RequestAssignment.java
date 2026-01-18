@@ -2,9 +2,9 @@ package org.example.model;
 
 public class RequestAssignment {
     public Long id;
-    public Long requestId;     // FK на RepairRequest
-    public Long technicianId;  // FK на Technician
-    public String role;        // Наприклад: "Lead", "Assistant"
+    public Long requestId;
+    public Long technicianId;
+    public String role;
     public String notes;
 
     public RequestAssignment() {}
