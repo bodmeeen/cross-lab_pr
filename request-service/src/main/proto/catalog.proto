@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "org.example.grpc";
+
+// Визначаємо сервіс
+service CatalogGrpcService {
+  // Метод: Перевірити чи існує послуга (приймає ID, повертає статус)
+  rpc CheckServiceExists (ServiceIdRequest) returns (ServiceExistsResponse);
+}
+
+// Повідомлення-запит (що ми надсилаємо)
+message ServiceIdRequest {
+  int64 id = 1;
+}
+
+// Повідомлення-відповідь (що ми отримуємо)
+message ServiceExistsResponse {
+  bool exists = 1;
+  string name = 2;
+}
