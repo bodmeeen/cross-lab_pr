@@ -7,6 +7,7 @@ public class RepairRequest {
     public String deviceModel;
     public String status;
     public BigDecimal quotedPrice;
+    public String problemDescription;
 
     public RepairRequest() {}
 }
