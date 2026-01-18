@@ -1,9 +1,15 @@
 package org.example.model;
 
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 
+@Entity
 public class ServiceItem {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
+
     public Long serviceTypeId;
     public String name;
     public BigDecimal price;
@@ -14,8 +20,7 @@ public class ServiceItem {
 
     public ServiceItem() {}
 
-    public ServiceItem(Long id, Long typeId, String name, BigDecimal price, Integer duration, String desc) {
-        this.id = id;
+    public ServiceItem(Long typeId, String name, BigDecimal price, Integer duration, String desc) {
         this.serviceTypeId = typeId;
         this.name = name;
         this.price = price;

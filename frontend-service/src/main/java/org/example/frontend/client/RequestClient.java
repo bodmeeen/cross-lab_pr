@@ -1,7 +1,7 @@
 package org.example.frontend.client;
 
 import io.quarkus.oidc.token.propagation.common.AccessToken;
-import jakarta.ws.rs.*; // Імпортуємо все для REST (GET, POST, DELETE)
+import jakarta.ws.rs.*; // імпорт всього для REST
 import jakarta.ws.rs.core.MediaType;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 import org.example.frontend.model.RepairRequest;

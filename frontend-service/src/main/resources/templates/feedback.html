@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Відгуки</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Відгуки</h2>
+
+    <div class="d-flex justify-content-center mb-4">
+        <a href="/" class="btn btn-secondary me-2">Головна</a>
+        <a href="/ui/requests" class="btn btn-outline-primary me-2">Заявки</a>
+        <a href="/ui/catalog" class="btn btn-outline-primary">Каталог</a>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card p-4 shadow-sm">
+                <h4>Залишити відгук</h4>
+                <form action="/ui/feedback/add" method="POST">
+                    <div class="mb-3">
+                        <label>Ваше ім'я</label>
+                        <input type="text" name="customerName" class="form-control" placeholder="Alice" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Оцінка (1-5)</label>
+                        <select name="rating" class="form-select">
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label>Коментар</label>
+                        <textarea name="comment" class="form-control" rows="3" placeholder="Чудовий сервіс!"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-warning w-100">Надіслати</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card p-3 shadow-sm">
+                <h4>Останні відгуки</h4>
+                <table class="table table-striped mt-3">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Клієнт</th>
+                        <th>Оцінка</th>
+                        <th>Коментар</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {#for fb in feedbacks}
+                        <tr>
+                            <td>{fb.id}</td>
+                            <td>{fb.customerName}</td>
+                            <td>
+                                <span class="badge bg-warning text-dark">{fb.rating} / 5</span>
+                            </td>
+                            <td>{fb.comment}</td>
+                        </tr>
+                    {/for}
+                    </tbody>
+                </table>
+                {#if feedbacks.isEmpty()}
+                    <div class="alert alert-info text-center">Ще немає відгуків.</div>
+                {/if}
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

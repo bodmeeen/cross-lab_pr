@@ -1,14 +1,7 @@
-package org.example.model;
+package org.example.frontend.model;
 
-import jakarta.persistence.*;
-
-@Entity
 public class Feedback {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
-
     public Long requestId;
     public Integer rating;
     public String comment;

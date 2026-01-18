@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Управління Каталогом</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+
+<div class="container mt-4 mb-5">
+    <h2 class="mb-4 text-center">Catalog Service (MySQL)</h2>
+
+    <div class="d-flex justify-content-center mb-4">
+        <a href="/" class="btn btn-secondary">На головну</a>
+    </div>
+
+    <div class="card shadow-sm mb-5">
+        <div class="card-header bg-primary text-white">
+            <h4 class="m-0">Послуги (Services)</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 border-end">
+                    <h5>Додати послугу</h5>
+                    <form action="/ui/catalog/add-service" method="POST">
+                        <div class="mb-2">
+                            <label>Назва</label>
+                            <input type="text" name="name" class="form-control" placeholder="Напр. Заміна батареї" required>
+                        </div>
+                        <div class="mb-2">
+                            <label>Ціна (грн)</label>
+                            <input type="number" name="price" class="form-control" placeholder="800" required>
+                        </div>
+                        <div class="mb-2">
+                            <label>Час (хв)</label>
+                            <input type="number" name="duration" class="form-control" placeholder="45">
+                        </div>
+                        <div class="mb-3">
+                            <label>Опис</label>
+                            <input type="text" name="description" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Зберегти послугу</button>
+                    </form>
+                </div>
+                <div class="col-md-8">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Назва</th>
+                            <th>Ціна</th>
+                            <th>Час</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {#for item in services}
+                            <tr>
+                                <td>{item.id}</td>
+                                <td>{item.name}</td>
+                                <td>{item.price} грн</td>
+                                <td>{item.durationMinutes} хв</td>
+                            </tr>
+                        {/for}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-success text-white">
+            <h4 class="m-0">Девайси (Devices)</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 border-end">
+                    <h5>Додати модель</h5>
+                    <form action="/ui/catalog/add-device" method="POST">
+                        <div class="mb-3">
+                            <label>Бренд</label>
+                            <input type="text" name="brand" class="form-control" placeholder="Напр. Samsung" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>Модель</label>
+                            <input type="text" name="model" class="form-control" placeholder="Напр. Galaxy S24 Ultra" required>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">Зберегти девайс</button>
+                    </form>
+                </div>
+                <div class="col-md-8">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Бренд</th>
+                            <th>Модель</th>
+                            <th>Статус</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {#for dev in devices}
+                            <tr>
+                                <td>{dev.id}</td>
+                                <td>{dev.brand}</td>
+                                <td><strong>{dev.model}</strong></td>
+                                <td>
+                                    {#if dev.isActive}
+                                        <span class="badge bg-success">Active</span>
+                                    {#else}
+                                        <span class="badge bg-secondary">Inactive</span>
+                                    {/if}
+                                </td>
+                            </tr>
+                        {/for}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

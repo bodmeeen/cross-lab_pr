@@ -1,14 +1,7 @@
-package org.example.model;
+package org.example.frontend.model;
 
-import jakarta.persistence.*;
-
-@Entity
 public class DeviceModel {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // автоматичний id mysql
     public Long id;
-
     public String brand;
     public String model;
     public Boolean isActive;

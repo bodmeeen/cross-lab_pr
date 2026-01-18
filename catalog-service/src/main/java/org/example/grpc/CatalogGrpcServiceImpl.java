@@ -3,25 +3,32 @@ package org.example.grpc;
 import io.quarkus.grpc.GrpcService;
 import io.smallrye.mutiny.Uni;
 import jakarta.inject.Inject;
-import org.example.repository.CatalogRepository;
+import org.example.model.ServiceItem;
+import org.example.repository.ServiceItemRepository;
 
 @GrpcService
-public class CatalogGrpcServiceImpl implements CatalogGrpcService {
+public class CatalogGrpcServiceImpl implements Catalog {
 
     @Inject
-    CatalogRepository repository;
+    ServiceItemRepository serviceRepository;
 
     @Override
-    public Uni<ServiceExistsResponse> checkServiceExists(ServiceIdRequest request) {
-        // Шукаємо послугу в репозиторії
-        var serviceOpt = repository.getServiceById(request.getId());
+    public Uni<ServiceIdReply> checkServiceExists(ServiceIdRequest request) {
 
-        boolean exists = serviceOpt.isPresent();
-        String name = serviceOpt.map(s -> s.name).orElse("Unknown");
-
-        return Uni.createFrom().item(ServiceExistsResponse.newBuilder()
-                .setExists(exists)
-                .setName(name)
-                .build());
+        return Uni.createFrom().item(() -> serviceRepository.findById(request.getId()))
+                .map(item -> {
+                    if (item != null) {
+                        return ServiceIdReply.newBuilder()
+                                .setExists(true)
+                                .setName(item.name)
+                                .setPrice(item.price != null ? item.price.doubleValue() : 0.0)
+                                .build();
+                    } else {
+                        return ServiceIdReply.newBuilder()
+                                .setExists(false)
+                                .setName("Not Found")
+                                .build();
+                    }
+                });
     }
 }

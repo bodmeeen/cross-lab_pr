@@ -1,32 +1,55 @@
 package org.example.resource;
 
-import io.quarkus.security.Authenticated;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import org.example.model.DeviceModel;
 import org.example.model.ServiceItem;
-import org.example.repository.CatalogRepository;
+import org.example.repository.DeviceModelRepository;
+import org.example.repository.ServiceItemRepository;
 
 import java.util.List;
 
 @Path("/catalog")
-@Authenticated
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class CatalogResource {
 
     @Inject
-    CatalogRepository repository;
+    DeviceModelRepository deviceRepository;
+
+    @Inject
+    ServiceItemRepository serviceRepository;
+
+
+    @GET
+    @Path("/devices")
+    public List<DeviceModel> getAllDevices() {
+        return deviceRepository.listAll();
+    }
+
+    @POST
+    @Path("/devices")
+    @Transactional
+    public Response createDevice(DeviceModel device) {
+        deviceRepository.persist(device);
+        return Response.status(Response.Status.CREATED).entity(device).build();
+    }
+
 
     @GET
     @Path("/services")
     public List<ServiceItem> getAllServices() {
-        return repository.getAllServices();
+        return serviceRepository.listAll();
     }
 
-    @GET
-    @Path("/models/{modelId}/services")
-    public List<ServiceItem> getServicesForModel(@PathParam("modelId") Long modelId) {
-        return repository.getServicesForDeviceModel(modelId);
+    @POST
+    @Path("/services")
+    @Transactional
+    public Response createService(ServiceItem service) {
+        serviceRepository.persist(service);
+        return Response.status(Response.Status.CREATED).entity(service).build();
     }
 }

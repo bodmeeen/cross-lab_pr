@@ -2,17 +2,20 @@ syntax = "proto3";
 
 option java_multiple_files = true;
 option java_package = "org.example.grpc";
+option java_outer_classname = "CatalogProto";
 
+package catalog;
 
-service CatalogGrpcService {
-  rpc CheckServiceExists (ServiceIdRequest) returns (ServiceExistsResponse);
+service Catalog {
+  rpc CheckServiceExists (ServiceIdRequest) returns (ServiceIdReply);
 }
 
 message ServiceIdRequest {
   int64 id = 1;
 }
 
-message ServiceExistsResponse {
+message ServiceIdReply {
   bool exists = 1;
   string name = 2;
+  double price = 3;
 }
